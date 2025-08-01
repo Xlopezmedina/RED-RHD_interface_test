@@ -38,7 +38,8 @@ const FileItem = ({ item, showWaveform, comment, onCommentChange, onSaveComment 
                 height: 80,
                 responsive: true,
                 normalize: true,
-                backend: 'WebAudio'
+                backend: 'WebAudio',
+                cors: 'anonymous'
             });
 
             waveSurfer.on('ready', () => {
@@ -57,12 +58,60 @@ const FileItem = ({ item, showWaveform, comment, onCommentChange, onSaveComment 
             waveSurfer.on('error', (error) => {
                 console.error('WaveSurfer error:', error);
                 setIsLoading(false);
+                // Try to load with MediaElement backend as fallback
+                if (waveSurfer.backend === 'WebAudio') {
+                    console.log('Retrying with MediaElement backend...');
+                    waveSurfer.destroy();
+                    initWaveformFallback();
+                }
             });
 
-            await waveSurfer.load(item.url);
+            console.log('Loading audio from:', item.url);
+            waveSurfer.load(item.url);
             waveSurferRef.current = waveSurfer;
         } catch (error) {
             console.error('Error initializing waveform:', error);
+            setIsLoading(false);
+        }
+    };
+
+    const initWaveformFallback = async () => {
+        if (!waveformRef.current) return;
+
+        try {
+            const waveSurfer = WaveSurfer.create({
+                container: waveformRef.current,
+                waveColor: '#94a3b8',
+                progressColor: '#3b82f6',
+                cursorColor: '#1e293b',
+                height: 80,
+                responsive: true,
+                normalize: true,
+                backend: 'MediaElement'
+            });
+
+            waveSurfer.on('ready', () => {
+                setWaveformLoaded(true);
+                setDuration(waveSurfer.getDuration());
+                setIsLoading(false);
+            });
+
+            waveSurfer.on('play', () => setIsPlaying(true));
+            waveSurfer.on('pause', () => setIsPlaying(false));
+            
+            waveSurfer.on('audioprocess', () => {
+                setCurrentTime(waveSurfer.getCurrentTime());
+            });
+
+            waveSurfer.on('error', (error) => {
+                console.error('WaveSurfer fallback error:', error);
+                setIsLoading(false);
+            });
+
+            waveSurfer.load(item.url);
+            waveSurferRef.current = waveSurfer;
+        } catch (error) {
+            console.error('Error initializing fallback waveform:', error);
             setIsLoading(false);
         }
     };
@@ -92,11 +141,12 @@ const FileItem = ({ item, showWaveform, comment, onCommentChange, onSaveComment 
                 </div>
                 <div className="file-actions">
                     <a 
-                        href={item.url} 
+                        href={`http://localhost:5000/api/download/${item.name}`}
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="btn btn-secondary"
                         title="Download file"
+                        download
                     >
                         <Download size={16} />
                     </a>
