@@ -3,6 +3,7 @@ from flask_cors import CORS
 from azure.storage.blob import ContainerClient
 from dotenv import load_dotenv
 import os
+import requests
 
 load_dotenv()
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def list_blobs():
         for blob in container_client.list_blobs():
             blob_list.append({
                 "name": blob.name,
-                "url": f"/api/audio/{blob.name}",
+                "url": f"http://localhost:5000/api/audio/{blob.name}",
                 "size": blob.size,
                 "last_modified": blob.last_modified.isoformat() if blob.last_modified else None
             })
@@ -33,8 +34,14 @@ def list_blobs():
 def get_audio(filename):
     try:
         blob_client = container_client.get_blob_client(filename)
-        stream = blob_client.download_blob()
-        audio_data = stream.readall()
+        
+        # Get the blob URL with SAS token for direct access
+        blob_url = f"{container_url}/{filename}?{sas_token}"
+        
+        # Stream the file directly from Azure
+        response = requests.get(blob_url, stream=True)
+        if response.status_code != 200:
+            return jsonify({"error": "File not found"}), 404
         
         # Determine content type based on file extension
         content_type = "audio/wav"
@@ -42,9 +49,54 @@ def get_audio(filename):
             content_type = "audio/mpeg"
         elif filename.lower().endswith('.m4a'):
             content_type = "audio/mp4"
+        elif filename.lower().endswith('.ogg'):
+            content_type = "audio/ogg"
         
-        return Response(audio_data, mimetype=content_type)
+        def generate():
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    yield chunk
+        
+        return Response(
+            generate(),
+            mimetype=content_type,
+            headers={
+                'Content-Length': response.headers.get('Content-Length'),
+                'Accept-Ranges': 'bytes',
+                'Cache-Control': 'no-cache'
+            }
+        )
     except Exception as e:
+        print(f"Error serving audio file {filename}: {str(e)}")
+        return jsonify({"error": str(e)}), 404
+
+@app.route('/api/download/<path:filename>')
+def download_file(filename):
+    try:
+        blob_client = container_client.get_blob_client(filename)
+        
+        # Get the blob URL with SAS token for direct download
+        blob_url = f"{container_url}/{filename}?{sas_token}"
+        
+        # Stream the file directly from Azure
+        response = requests.get(blob_url, stream=True)
+        if response.status_code != 200:
+            return jsonify({"error": "File not found"}), 404
+        
+        def generate():
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    yield chunk
+        
+        return Response(
+            generate(),
+            headers={
+                'Content-Disposition': f'attachment; filename="{filename.split("/")[-1]}"',
+                'Content-Length': response.headers.get('Content-Length'),
+            }
+        )
+    except Exception as e:
+        print(f"Error downloading file {filename}: {str(e)}")
         return jsonify({"error": str(e)}), 404
 
 @app.route('/api/comments', methods=['POST'])
