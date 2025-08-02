@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cairdio-dev-8f435",
+  "private_key_id": "2e1bb339037ac593b9d240e23a83ffb5dd54243c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDmqh7SXcnBnnG3\nvHfQnEGj1s0fae3PmroGzHPdIdsLq+j8AtBNslfMGFKutCg7ZKRAaBkATulrkS4Q\nSM1zsIrFhFYED76JqWiodK5Y0M3NC85q9cIPwGLobDYiBnjlh5s34Peg+kHqh2y/\nIB2KPZEoobPNumpvaFzCfqKaHT7VsVU0BWeQ+vNT/NUzii2Del9EuDS0s5HrcqxJ\nFDQGBk+pLlZPIZU5Dm5rZf6PmJGHNmirUg9oVkBvFqFV2Qn5tOuF7MRSCQ7Ax4yR\njeBmCjebX8UFY0h0Am1SBds1sydgJs+OpvN5WRtJndoqXigL969vMCFeR9RBvLc0\nUr3Le7HDAgMBAAECggEAZNwRUxn4fQWbouQxndGdcBceJTTL7CGzYwKmTRSfM7jN\nTNisHbU0Z8Vg7gxPpTzKB3GdMQHQVh0qv6sdzw7sdxZ5CBicT5R4c2Rl0ecnfhfC\nAAoK+5k7hna+qt0aov7LM8FWdhjHltX1ipLv58EpBlPCi9wN6z3+hXsa/Xl5PrWR\nlnPBtqGH1zOA3XR+lZ7eeQGCYLwvv1wmNjcgJEVhryF8Wcj+NKS3NJIz+HRWd9fs\n2Wb5GnggEoTRDBzvBiSHEr6cpkr+NQHzX7komI+kcI7phjRTd22fAbhoQR/xSNOq\np2uyI/BHI3ucbjiLev0N85bVSG0WEzx+8tRH+pc1EQKBgQD+lcVrU1icNSFCm2nx\nLREb/tzhFWbhX1mxXrX/4kvmz6zuhTLfsTXXd1jeVrPVoBRRALZA8lYn5iP9hkio\nvJcIa4gekCI0OyiNjd9f0MpjnLnCm2YeRUzPpQpj8KT7iX4gt5c3AtpVVKmoG53I\nQehC9t1sTYVVDCMRlV0QhqfJEwKBgQDn8lCL3lbhUE9YLdnZXQW2bO+iIHZq7u3A\nMo0i9iifD9ZAJPg8ladAeJH18GVsvzFhV3wjNUoL0STinPzaOR03FolnqGHaZr7v\nIjqn0i1uBKYJFhMJY+Azt9LgkUTXCk7Muv+fzssuEZ+XsKEebqdD6Bhh24JImwU8\nFnf6Bpm6kQKBgQCSuqeJ8AOGJGkDBqfMxPizdfTAFaGyC06al8e1ryun39H/tu1X\nV798a+DgZIBJg3WyKgLg88sMO+xKVnbSKb+yrqdJVjEggWgiDb7Mbn33Y4D81KvK\njo5yruCKMUwlXV1AZg/VOOO1gpI1vZT2smW3EqkTnqpWFiSwIbH9sF5L2QKBgC/A\nHvzshQ5VrkAFEHhDQk3QF3VVIYvaLHAI+C1eZ/Z3GDCUa9ZtKMWJDOOI3hiJM+1K\nSXAmJFxSbjmJADUc1PrmVNtWOu7vgBdTAKhUCK5Bnrz4ImsoeJutGGjK/1UV9isH\nxGBt/j45upVL85+EQEMmoP5kZmn0IBvCtGhwu21BAoGADGZGHZ8hfBB0eorv+9RG\noFGothPw4Xubinb3UdykEO3pk6npRDJ7sB/z3PpTDRONJWW7Uy/aoXBuZrlupYcT\nJCxOoBIwpmg9FYPpWAnCFiyoouUC2n3eBwNaKVf4C+Srp9vRRtIq1/NCseO3LQpG\n600P0Mzl+Tya9DfF5f82qKc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "nexus-gcs-access@cairdio-dev-8f435.iam.gserviceaccount.com",
+  "client_id": "105281774529447280879",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nexus-gcs-access%40cairdio-dev-8f435.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

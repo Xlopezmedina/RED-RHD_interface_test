@@ -1,0 +1,183 @@
+.file-item {
+  background: white;
+  padding: 24px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.file-item:hover {
+  background-color: #fafbfc;
+}
+
+.file-item:last-child {
+  border-bottom: none;
+}
+
+.file-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+  word-break: break-word;
+}
+
+.file-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #64748b;
+  align-items: center;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.audio-section {
+  margin-bottom: 20px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.load-waveform-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+}
+
+.audio-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.waveform-container {
+  background: white;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.waveform {
+  width: 100%;
+  min-height: 80px;
+}
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.play-btn {
+  min-width: 100px;
+  justify-content: center;
+}
+
+.time-display {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background-color: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.comment-section {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.comment-header .form-label {
+  margin: 0;
+  color: #374151;
+  font-weight: 500;
+}
+
+.comment-textarea {
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 12px;
+}
+
+.save-comment-btn {
+  min-width: 120px;
+  justify-content: center;
+}
+
+.save-comment-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #e2e8f0;
+  color: #94a3b8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .file-item {
+    padding: 16px;
+  }
+  
+  .file-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .file-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+  
+  .playback-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .play-btn {
+    width: 100%;
+  }
+  
+  .time-display {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .file-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .audio-section {
+    padding: 12px;
+  }
+  
+  .comment-textarea {
+    min-height: 100px;
+  }
+}
